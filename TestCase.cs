@@ -8,15 +8,15 @@ namespace Renju
     {
         List<List<string>> _cells;
         string _result;
-        int _resultVertical;
         int _resultHorizontal;
+        int _resultVertical;
 
         public string ReturnResult()
         {
             if (this._result == "0")
                 return _result;
             else
-                return _result + '\n' + _resultVertical + ' ' + _resultHorizontal;
+                return _result + '\n' + _resultHorizontal + ' ' + _resultVertical;
         }
 
 
@@ -25,7 +25,7 @@ namespace Renju
             _cells = new List<List<string>>();
             foreach (string line in lines)
             {
-                List<string> newLine = new List<string>(line.Split(' '));
+                List<string> newLine = new(line.Split(' '));
                 this._cells.Add(newLine);
             }
             this._result = "0";
@@ -49,7 +49,7 @@ namespace Renju
             CheckRow();
             CheckColumn();
             CheckRightDiagonal();
-            checkLeftDiagonal();
+            CheckLeftDiagonal();
         }
 
         private bool CheckRow()
@@ -65,8 +65,8 @@ namespace Renju
                             continue;
                         if (j - 1 >= 0 && _cells[i][j - 1] == player)
                             continue;
-                        _resultVertical = i + 1;
-                        _resultHorizontal = j + 1;
+                        _resultHorizontal = i + 1;
+                        _resultVertical = j + 1;
                         _result = player;
                         return true;
                     }
@@ -88,8 +88,8 @@ namespace Renju
                             continue;
                         if (i - 1 >= 0 && _cells[i - 1][j] == player)
                             continue;
-                        _resultVertical = i + 1;
-                        _resultHorizontal = j + 1;
+                        _resultHorizontal = i + 1;
+                        _resultVertical = j + 1;
                         _result = player;
                         return true;
                     }
@@ -111,8 +111,8 @@ namespace Renju
                             continue;
                         if (i - 1 >= 0 && j - 1 >= 0 && _cells[i - 1][j - 1] == player)
                             continue;
-                        _resultVertical = i + 1;
-                        _resultHorizontal = j + 1;
+                        _resultHorizontal = i + 1;
+                        _resultVertical = j + 1;
                         _result = player;
                         return true;
                     }
@@ -121,7 +121,7 @@ namespace Renju
             return false;
         }
 
-        private bool checkLeftDiagonal()
+        private bool CheckLeftDiagonal()
         {
             for (int i = 0; i < 15; i++)
             {
@@ -134,8 +134,8 @@ namespace Renju
                             continue;
                         if (i - 1 >= 0 && j + 1 < 19 && _cells[i - 1][j + 1] == player)
                             continue;
-                        _resultVertical = i + 1 + 4;
-                        _resultHorizontal = j + 1 - 4;
+                        _resultHorizontal = i + 1 + 4;
+                        _resultVertical = j + 1 - 4;
                         _result = player;
                         return true;
                     }

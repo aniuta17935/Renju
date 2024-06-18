@@ -10,8 +10,7 @@ namespace Renju
         {
             Console.WriteLine("Enter file path, please:");
             string filePath = Console.ReadLine();
-            // /Users/ann.adamchuk/Projects/Renju/data.txt
-            List<string> lines = new List<string>();
+            List<string> lines = new();
             try
             {
                 lines.AddRange(File.ReadAllLines(filePath));
@@ -36,7 +35,7 @@ namespace Renju
                 return;
             }
 
-            List<TestCase> testCaseList = new List<TestCase>();
+            List<TestCase> testCaseList = new();
             try
             {
                 for (int i = 0; i < testCasesNum; i++)

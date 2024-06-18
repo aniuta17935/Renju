@@ -6,6 +6,7 @@ namespace Renju
 {
     public class TestCase
     {
+        public const int BoardSize = 19;
         List<List<string>> _cells;
         string _result;
         int _resultHorizontal;
@@ -15,8 +16,7 @@ namespace Renju
         {
             if (this._result == "0")
                 return _result;
-            else
-                return _result + '\n' + _resultHorizontal + ' ' + _resultVertical;
+            return _result + '\n' + _resultHorizontal + ' ' + _resultVertical;
         }
 
 
@@ -33,14 +33,14 @@ namespace Renju
 
         public bool CheckTest()
         {
-            bool length = false;
-            bool content = false;
             foreach (List<string> row in _cells)
             {
-                length = row.Capacity == 19;
-                content = row.All(x => x == "0" || x == "1" || x == "2");
+                if (row.Count != BoardSize)
+                    return false;
+                if (!row.All(x => x == "0" || x == "1" || x == "2"))
+                    return false;
             }
-            return length && content;
+            return true;
         }
 
 
@@ -52,96 +52,88 @@ namespace Renju
             CheckLeftDiagonal();
         }
 
-        private bool CheckRow()
+        private void CheckRow()
         {
-            for (int i = 0; i < 19; i++)
+            for (int i = 0; i < BoardSize; i++)
             {
-                for (int j = 0; j < 15; j++)
+                for (int j = 0; j < BoardSize - 4; j++)
                 {
                     string player = _cells[i][j];
                     if (player != "0" && _cells[i][j + 1] == player && _cells[i][j + 2] == player && _cells[i][j + 3] == player && _cells[i][j + 4] == player)
                     {
-                        if (j + 5 < 19 && _cells[i][j + 5] == player)
+                        if (j + 5 < BoardSize && _cells[i][j + 5] == player)
                             continue;
                         if (j - 1 >= 0 && _cells[i][j - 1] == player)
                             continue;
                         _resultHorizontal = i + 1;
                         _resultVertical = j + 1;
                         _result = player;
-                        return true;
                     }
                 }
             }
-            return false;
         }
 
-        private bool CheckColumn()
+        private void CheckColumn()
         {
-            for (int j = 0; j < 19; j++)
+            for (int j = 0; j < BoardSize; j++)
             {
-                for (int i = 0; i < 15; i++)
+                for (int i = 0; i < BoardSize - 4; i++)
                 {
                     string player = _cells[i][j];
                     if (player != "0" && _cells[i + 1][j] == player && _cells[i + 2][j] == player && _cells[i + 3][j] == player && _cells[i + 4][j] == player)
                     {
-                        if (i + 5 < 19 && _cells[i + 5][j] == player)
+                        if (i + 5 < BoardSize && _cells[i + 5][j] == player)
                             continue;
                         if (i - 1 >= 0 && _cells[i - 1][j] == player)
                             continue;
                         _resultHorizontal = i + 1;
                         _resultVertical = j + 1;
                         _result = player;
-                        return true;
                     }
                 }
             }
-            return false;
         }
 
-        private bool CheckRightDiagonal()
+        private void CheckRightDiagonal()
         {
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < BoardSize - 4; i++)
             {
-                for (int j = 0; j < 15; j++)
+                for (int j = 0; j < BoardSize - 4; j++)
                 {
                     string player = _cells[i][j];
                     if (player != "0" && _cells[i + 1][j + 1] == player && _cells[i + 2][j + 2] == player && _cells[i + 3][j + 3] == player && _cells[i + 4][j + 4] == player)
                     {
-                        if (i + 5 < 19 && j + 5 < 19 && _cells[i + 5][j + 5] == player)
+                        if (i + 5 < BoardSize && j + 5 < BoardSize && _cells[i + 5][j + 5] == player)
                             continue;
                         if (i - 1 >= 0 && j - 1 >= 0 && _cells[i - 1][j - 1] == player)
                             continue;
                         _resultHorizontal = i + 1;
                         _resultVertical = j + 1;
                         _result = player;
-                        return true;
                     }
                 }
             }
-            return false;
         }
 
-        private bool CheckLeftDiagonal()
+        private void CheckLeftDiagonal()
         {
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < BoardSize - 4; i++)
             {
-                for (int j = 4; j < 19; j++)
+                for (int j = 4; j < BoardSize; j++)
                 {
                     string player = _cells[i][j];
                     if (player != "0" && _cells[i + 1][j - 1] == player && _cells[i + 2][j - 2] == player && _cells[i + 3][j - 3] == player && _cells[i + 4][j - 4] == player)
                     {
-                        if (i + 5 < 19 && j - 5 >= 0 && _cells[i + 5][j - 5] == player)
+                        if (i + 5 < BoardSize && j - 5 >= 0 && _cells[i + 5][j - 5] == player)
                             continue;
-                        if (i - 1 >= 0 && j + 1 < 19 && _cells[i - 1][j + 1] == player)
+                        if (i - 1 >= 0 && j + 1 < BoardSize && _cells[i - 1][j + 1] == player)
                             continue;
                         _resultHorizontal = i + 1 + 4;
                         _resultVertical = j + 1 - 4;
                         _result = player;
-                        return true;
                     }
                 }
             }
-            return false;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Renju
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
+                return;
             }
 
             int testCasesNum;
@@ -40,7 +41,7 @@ namespace Renju
             {
                 for (int i = 0; i < testCasesNum; i++)
                 {
-                    testCaseList.Add(new TestCase(lines.GetRange(i * 19 + 1, 19)));
+                    testCaseList.Add(new TestCase(lines.GetRange(i * TestCase.BoardSize + 1, TestCase.BoardSize)));
                 }
             }
             catch (Exception)

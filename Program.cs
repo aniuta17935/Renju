@@ -6,6 +6,9 @@ namespace Renju
 {
     class MainClass
     {
+        public const int BoardSize = 19;
+        public const int WinCount = 5;
+
         public static void Main(string[] args)
         {
             Console.WriteLine("Enter file path, please:");
@@ -27,7 +30,7 @@ namespace Renju
                 testCasesNum = Convert.ToInt32(lines[0]);
                 if (testCasesNum < 1 || testCasesNum > 11)
                 {
-                    throw new Exception();
+                    throw new Exception(); 
                 }
             }
             catch (Exception)
@@ -41,7 +44,7 @@ namespace Renju
             {
                 for (int i = 0; i < testCasesNum; i++)
                 {
-                    testCaseList.Add(new TestCase(lines.GetRange(i * TestCase.BoardSize + 1, TestCase.BoardSize)));
+                    testCaseList.Add(new TestCase(lines.GetRange(i * BoardSize + 1, BoardSize)));
                 }
             }
             catch (Exception)
@@ -55,14 +58,12 @@ namespace Renju
                 Console.WriteLine($"Test case {i + 1}");
                 if (!testCaseList[i].CheckTest())
                 {
-                    Console.WriteLine($"Incorrect test case");
+                    Console.WriteLine($"Incorrect test case \n");
                     continue;
                 }
-                testCaseList[i].Process();
-                Console.WriteLine(testCaseList[i].ReturnResult());
-                Console.WriteLine();
+                string result = testCaseList[i].Process();
+                Console.WriteLine(result + '\n');
             }
-
         }
     }
 }

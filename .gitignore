@@ -26,4 +26,4 @@ _ReSharper*/
 # Ignore project-specific files
 *.csproj.user
 
-*.DR_STORE
+*.DS_STORE

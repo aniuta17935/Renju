@@ -8,6 +8,7 @@ namespace Renju
     {
         public const int BoardSize = 19;
         public const int WinCount = 5;
+        public const int MaxTestCasesNum = 11;
 
         public static void Main(string[] args)
         {
@@ -28,7 +29,7 @@ namespace Renju
             try
             {
                 testCasesNum = Convert.ToInt32(lines[0]);
-                if (testCasesNum < 1 || testCasesNum > 11)
+                if (testCasesNum < 1 || testCasesNum > MaxTestCasesNum)
                 {
                     throw new Exception(); 
                 }

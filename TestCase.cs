@@ -10,7 +10,8 @@ namespace Renju
         List<List<string>> _cells;
         Result _result;
 
-        const int StepSize = MainClass.WinCount - 1;
+        const int WinCount = MainClass.WinCount;
+        const int StepSize = WinCount - 1;
         const int BoardSize = MainClass.BoardSize;
 
 
@@ -22,7 +23,7 @@ namespace Renju
                 List<string> newLine = new(line.Split(' '));
                 _cells.Add(newLine);
             }
-            _result = new Result("0");
+            _result = new Result();
         }
 
         public string Process()
@@ -41,9 +42,9 @@ namespace Renju
                 for (int j = 0; j < BoardSize - StepSize; j++)
                 {
                     string player = _cells[i][j];
-                    if (player != "0" && _cells[i][j + 1] == player && _cells[i][j + 2] == player && _cells[i][j + 3] == player && _cells[i][j + 4] == player)
+                    if (player != "0" && Enumerable.Range(1, StepSize).All(k => _cells[i][j + k] == player))
                     {
-                        if (j + 5 < BoardSize && _cells[i][j + 5] == player)
+                        if (j + WinCount < BoardSize && _cells[i][j + WinCount] == player)
                             continue;
                         if (j - 1 >= 0 && _cells[i][j - 1] == player)
                             continue;
@@ -60,9 +61,9 @@ namespace Renju
                 for (int i = 0; i < BoardSize - StepSize; i++)
                 {
                     string player = _cells[i][j];
-                    if (player != "0" && _cells[i + 1][j] == player && _cells[i + 2][j] == player && _cells[i + 3][j] == player && _cells[i + 4][j] == player)
+                    if (player != "0" && Enumerable.Range(1, StepSize).All(k => _cells[i + k][j] == player))
                     {
-                        if (i + 5 < BoardSize && _cells[i + 5][j] == player)
+                        if (i + WinCount < BoardSize && _cells[i + WinCount][j] == player)
                             continue;
                         if (i - 1 >= 0 && _cells[i - 1][j] == player)
                             continue;
@@ -79,9 +80,9 @@ namespace Renju
                 for (int j = 0; j < BoardSize - StepSize; j++)
                 {
                     string player = _cells[i][j];
-                    if (player != "0" && _cells[i + 1][j + 1] == player && _cells[i + 2][j + 2] == player && _cells[i + 3][j + 3] == player && _cells[i + 4][j + 4] == player)
+                    if (player != "0" && Enumerable.Range(1, StepSize).All(k => _cells[i + k][j + k] == player))
                     {
-                        if (i + 5 < BoardSize && j + 5 < BoardSize && _cells[i + 5][j + 5] == player)
+                        if (i + WinCount < BoardSize && j + WinCount < BoardSize && _cells[i + WinCount][j + WinCount] == player)
                             continue;
                         if (i - 1 >= 0 && j - 1 >= 0 && _cells[i - 1][j - 1] == player)
                             continue;
@@ -98,9 +99,9 @@ namespace Renju
                 for (int j = StepSize; j < BoardSize; j++)
                 {
                     string player = _cells[i][j];
-                    if (player != "0" && _cells[i + 1][j - 1] == player && _cells[i + 2][j - 2] == player && _cells[i + 3][j - 3] == player && _cells[i + 4][j - 4] == player)
+                    if (player != "0" && Enumerable.Range(1, StepSize).All(k => _cells[i + k][j - k] == player))
                     {
-                        if (i + 5 < BoardSize && j - 5 >= 0 && _cells[i + 5][j - 5] == player)
+                        if (i + WinCount < BoardSize && j - WinCount >= 0 && _cells[i + WinCount][j - WinCount] == player)
                             continue;
                         if (i - 1 >= 0 && j + 1 < BoardSize && _cells[i - 1][j + 1] == player)
                             continue;

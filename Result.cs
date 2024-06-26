@@ -7,9 +7,9 @@ namespace RenjuProject
         int _horizontal;
         int _vertical;
 
-        public Result(string player)
+        public Result()
         {
-            _player = player;
+            _player = "0";
         }
 
         public Result(string player, int horizontal, int vertical)
